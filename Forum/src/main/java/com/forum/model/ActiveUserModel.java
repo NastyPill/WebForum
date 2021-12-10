@@ -1,17 +1,15 @@
 package com.forum.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserModel {
-
-    private String username;
-    @JsonIgnore
-    private String password;
-
+public class ActiveUserModel {
+    private UserModel userModel;
+    private LocalDateTime lastAction;
 }
