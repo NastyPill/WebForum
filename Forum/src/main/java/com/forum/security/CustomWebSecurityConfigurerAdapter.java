@@ -33,7 +33,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         for (UserModel userModel : userService.getAllUsers()) {
             auth.inMemoryAuthentication()
-                    .withUser(userModel.getUsername())
+                    .withUser(userModel.getUserName())
                     .password(passwordEncoder.encode(userModel.getPassword()))
                     .authorities("USER");
         }

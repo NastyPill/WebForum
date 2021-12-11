@@ -27,7 +27,7 @@ public class UserRepository {
         boolean isActive = false;
         List<ActiveUserModel> toDelete = new ArrayList<>();
         for (ActiveUserModel activeUserModel: active) {
-            if(activeUserModel.getUserModel().getUsername().equals(username)) {
+            if(activeUserModel.getUserModel().getUserName().equals(username)) {
                 activeUserModel.setLastAction(LocalDateTime.now());
                 isActive = true;
             }
@@ -37,7 +37,7 @@ public class UserRepository {
         }
         if(!isActive) {
             active.add(new ActiveUserModel(users.stream()
-                    .filter(x -> x.getUsername().equals(username))
+                    .filter(x -> x.getUserName().equals(username))
                     .collect(Collectors.toList())
                     .get(0),
                     LocalDateTime.now()));
@@ -56,7 +56,7 @@ public class UserRepository {
     }
 
     public UserModel register(UserModel userModel) {
-        if(isUserExists(userModel.getUsername())) {
+        if(isUserExists(userModel.getUserName())) {
             throw new IllegalArgumentException();
         }
 
@@ -74,7 +74,7 @@ public class UserRepository {
 
     private boolean isUserExists(String username) {
         for (UserModel user : users) {
-            if(user.getUsername().equals(username)) {
+            if(user.getUserName().equals(username)) {
                 return true;
             }
         }
