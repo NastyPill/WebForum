@@ -14,44 +14,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("/getAllMessages")
+    @PostMapping("/forum/getAllMessages")
     public ResponseEntity<List<MessageModel>> getAllMessages(@RequestBody GetMessageModel request) {
         System.out.println(request);
         return ResponseEntity.ok(userService.getAllMessages(request));
     }
 
-    @GetMapping("/getAllThemes")
+    @GetMapping("/forum/getAllThemes")
     public ResponseEntity<List<MainTheme>> getAllThemes() {
         return ResponseEntity.ok(userService.getAllThemes());
     }
 
-    @PostMapping("/getNewMessages")
+    @PostMapping("/forum/getNewMessages")
     public ResponseEntity<List<MessageModel>> getNewMessages(@RequestBody GetMessageModel request) {
         return ResponseEntity.ok(userService.getNewMessages(request));
     }
 
-    @PostMapping("/sendMessage")
+    @PostMapping("/user/sendMessage")
     public ResponseEntity<MessageModel> saveMessage(@RequestBody MessageForSave model) {
         return ResponseEntity.ok(userService.saveMessage(model));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public ResponseEntity<UserModel> register(@RequestBody UserModel userModel) {
         return ResponseEntity.ok(userService.registerNewUser(userModel));
     }
 
-    @GetMapping("/all")
+    @GetMapping("/forum/allUsers")
     public ResponseEntity<List<UserModel>> allUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @GetMapping("/active")
+    @GetMapping("/forum/activeUsers")
     public ResponseEntity<List<ActiveUserModel>> allActiveUsers() {
         return ResponseEntity.ok(userService.getActiveUsers());
     }
