@@ -45,17 +45,18 @@ public class UserService {
         return forumRepository.getAllThemes();
     }
 
-    public MessageForSave saveMessage(MessageForSave messageModel) {
+    public MessageModel  saveMessage(MessageForSave messageModel) {
         userRepository.updateActivity(messageModel.getUserName());
+        MessageModel model = MessageModel
+                .builder()
+                .message(messageModel.getMessage())
+                .userName(messageModel.getUserName())
+                .dateTime(LocalDateTime.now())
+                .build();
         forumRepository
                 .getSubThemeByName(messageModel.getMainThemeName(), messageModel.getSubThemeName())
-                .getMessageModelList().add(MessageModel
-                        .builder()
-                        .message(messageModel.getMessage())
-                        .userName(messageModel.getUserName())
-                        .dateTime(LocalDateTime.now())
-                        .build());
-        return messageModel;
+                .getMessageModelList().add(model);
+        return model;
     }
 
     public UserModel registerNewUser(UserModel userModel) {

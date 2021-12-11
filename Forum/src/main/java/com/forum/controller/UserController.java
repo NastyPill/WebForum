@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/sendMessage")
-    public ResponseEntity<MessageForSave> saveMessage(@RequestBody MessageForSave model) {
+    public ResponseEntity<MessageModel> saveMessage(@RequestBody MessageForSave model) {
         return ResponseEntity.ok(userService.saveMessage(model));
     }
 
