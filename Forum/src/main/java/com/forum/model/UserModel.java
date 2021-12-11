@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserModel {
 
-    private String username;
+    private String userName;
     @JsonIgnore
     private String password;
 
