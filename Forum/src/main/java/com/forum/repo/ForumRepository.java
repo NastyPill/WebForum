@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @Repository
@@ -51,7 +52,7 @@ public class ForumRepository {
     }
 
     private List<MessageModel> initMessages() {
-        List<MessageModel> result = new ArrayList<>();
+        List<MessageModel> result = new CopyOnWriteArrayList<>();
         for (int i = 0; i < 10; i++) {
             result.add(MessageModel
                     .builder()

@@ -1,7 +1,7 @@
 # WebForum
 ##Endpoints
 ###Forum ineraction edpoints
-POST: `forum/getAllMessages`
+GET: `forum/getAllMessages`
 accepts:
 ```
 {
@@ -77,7 +77,7 @@ returns
     ...
 ]
 ```
-POST: `forum/getNewMessages`
+GET: `forum/getNewMessages`
 accepts:
 ```
 {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,10 +20,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/forum/getAllMessages")
-    public ResponseEntity<List<MessageModel>> getAllMessages(@RequestBody GetMessageModel request) {
-        System.out.println(request);
-        return ResponseEntity.ok(userService.getAllMessages(request));
+    @GetMapping("/forum/getAllMessages/{main}/{sub}")
+    public ResponseEntity<List<MessageModel>> getAllMessages(@PathVariable(name = "main") String main, @PathVariable(name = "sub") String sub) {
+        return ResponseEntity.ok(userService.getAllMessages(GetMessageModel
+                .builder()
+                        .mainTheme(main)
+                        .subTheme(sub)
+                .build()));
     }
 
     @GetMapping("/forum/getAllThemes")
@@ -30,9 +34,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllThemes());
     }
 
-    @PostMapping("/forum/getNewMessages")
-    public ResponseEntity<List<MessageModel>> getNewMessages(@RequestBody GetMessageModel request) {
-        return ResponseEntity.ok(userService.getNewMessages(request));
+    @GetMapping("/forum/getNewMessages/{main}/{sub}")
+    public ResponseEntity<List<MessageModel>> getNewMessages(@PathVariable(name = "main") String main, @PathVariable(name = "sub") String sub, @RequestParam(name = "time") String time) {
+        return ResponseEntity.ok(userService.getNewMessages(GetMessageModel.builder()
+                        .mainTheme(main)
+                        .subTheme(sub)
+                        .lastSeenTime(LocalDateTime.parse(time))
+                .build()));
     }
 
     @PostMapping("/user/sendMessage")

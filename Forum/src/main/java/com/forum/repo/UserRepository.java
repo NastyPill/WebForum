@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @Repository
@@ -20,7 +21,7 @@ public class UserRepository {
 
     public UserRepository(List<UserModel> users) {
         this.users = initUsers();
-        this.active = new ArrayList<>();
+        this.active = new CopyOnWriteArrayList<>();
     }
 
     public void updateActivity(String username) {
@@ -48,7 +49,7 @@ public class UserRepository {
     }
 
     private List<UserModel> initUsers() {
-        List<UserModel> users = new ArrayList<>();
+        List<UserModel> users = new CopyOnWriteArrayList<>();
         for (int i = 0; i < 10; i++) {
             users.add(new UserModel("user" + i, "password"));
         }
